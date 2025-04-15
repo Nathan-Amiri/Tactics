@@ -9,19 +9,22 @@ public class Tile : MonoBehaviour
     public static Dictionary<Vector2, Tile> tileIndex = new();
 
     // PREFAB REFERENCE:
-    [SerializeField] private SpriteRenderer sr;
+    [SerializeField] private SpriteRenderer colorSR;
+    [SerializeField] private SpriteRenderer spriteSR;
 
     [SerializeField] private List<Color> terrainColors = new();
 
-    [SerializeField] private List<Sprite> unitSprites = new();
+    // SCENE REFERENCE:
+    public int terrainType;
+
+    [SerializeField] private bool isShopTile;
 
     // CONSTANT:
-    private readonly List<string> terrainNames = new() { "Marsh", "Wildfire", "Cliff", "Plain", "Storm", "Tundra", "Chasm", "Forest", "Mine" };
+    [NonSerialized] public readonly List<string> terrainNames = new() { "Marsh", "Wildfire", "Cliff", "Plain", "Storm", "Tundra", "Chasm", "Forest", "Mine" };
 
     // DYNAMIC:
     private GameManager gameManager;
-
-    public int terrainType;
+    private UnitIndex unitIndex;
 
     [NonSerialized] public UnitData unitData;
 
@@ -29,31 +32,46 @@ public class Tile : MonoBehaviour
     {
         GameObject miscScripts = GameObject.Find("MiscScripts");
         gameManager = miscScripts.GetComponent<GameManager>();
+        unitIndex = miscScripts.GetComponent<UnitIndex>();
 
         tileIndex.Add(transform.position, this);
 
-        terrainType = UnityEngine.Random.Range(0, 9);
-        Debug.Log(terrainType);
-        sr.color = terrainColors[terrainType];
+        colorSR.color = terrainColors[terrainType];
+    }
+
+    private void Start()
+    {
+        LoadUnit(unitIndex.LoadUnitFromIndex(0));
     }
 
     public void LoadUnit(UnitData data)
     {
         unitData = data;
 
-        sr.sprite = data.sprite;
-        sr.color = Color.white;
+        spriteSR.sprite = data.sprite;
+        spriteSR.enabled = true;
     }
     public void UnloadUnit()
     {
         unitData = default;
 
-        sr.sprite = null;
-        sr.color = terrainColors[terrainType];
+        spriteSR.enabled = false;
+        spriteSR.sprite = null;
     }
 
     private void OnMouseDown()
     {
-        Debug.Log("Tile" + transform.position);
+        if (isShopTile)
+        {
+            OnShopDown();
+            return;
+        }
+
+        gameManager.LoadMainInfo(this);
+    }
+
+    private void OnShopDown()
+    {
+
     }
 }

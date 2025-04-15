@@ -5496,7 +5496,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e80ad703634b684e84a34226cda5851, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  unitIndex: {fileID: 0}
   mainInfo: {fileID: 1211100538}
   mainInfoName: {fileID: 1156695075}
 --- !u!114 &1569807320
@@ -5511,7 +5510,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2b4d3d956eece4469a582c7b2ea18f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  unitSprites: []
+  unitSprites:
+  - {fileID: 21300000, guid: 0efd0bd863baa3b4b922d78eb22747cb, type: 3}
 --- !u!1001 &1592013761
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7454,6 +7454,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 727076805}
     m_Modifications:
+    - target: {fileID: -7766171023952069294, guid: 61029a06e5f34374da02cdb6559b4c26, type: 3}
+      propertyPath: isShopTile
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1596903605915304307, guid: 61029a06e5f34374da02cdb6559b4c26, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
