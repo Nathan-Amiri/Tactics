@@ -197,6 +197,7 @@ MonoBehaviour:
   - {r: 0.09019608, g: 0.7647059, b: 0, a: 1}
   - {r: 1, g: 0.5176471, b: 0.9098039, a: 1}
   terrainType: 0
+  debugStartingUnit: -1
   isShopTile: 0
 --- !u!61 &5422880523958448627
 BoxCollider2D:

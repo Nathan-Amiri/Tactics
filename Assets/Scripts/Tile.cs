@@ -17,10 +17,9 @@ public class Tile : MonoBehaviour
     // SCENE REFERENCE:
     public int terrainType;
 
-    [SerializeField] private bool isShopTile;
+    public int debugStartingUnit = -1;
 
-    // CONSTANT:
-    [NonSerialized] public readonly List<string> terrainNames = new() { "Marsh", "Wildfire", "Cliff", "Plain", "Storm", "Tundra", "Chasm", "Forest", "Mine" };
+    [SerializeField] private bool isShopTile;
 
     // DYNAMIC:
     private GameManager gameManager;
@@ -41,7 +40,8 @@ public class Tile : MonoBehaviour
 
     private void Start()
     {
-        LoadUnit(unitIndex.LoadUnitFromIndex(0));
+        if (debugStartingUnit != -1)
+            LoadUnit(unitIndex.LoadUnitFromIndex(debugStartingUnit));
     }
 
     public void LoadUnit(UnitData data)
